@@ -1,0 +1,22 @@
+@import "../client/base.scss";
+@import "../client/header.scss";
+
+button.selected {
+    cursor: default !important;
+}
+button._mtp {
+    //@include font(20px, 700, 29.26px);
+    font-family: "Montserrat", sans-serif;
+    color: rgba(255, 255, 255, 1);
+    --bs-btn-active-bg: rgba(116, 116, 170, 1);
+    --bs-btn-active-border-color: rgba(116, 116, 170, 1);
+    background-color: rgba(116, 116, 170, 1);
+    border-color: rgba(116, 116, 170, 1);
+    //border-radius: 0;
+    &:hover,
+    &:focus {
+        color: rgba(255, 255, 255, 1);
+        background-color: rgba(116, 116, 170, 1);
+        border-color: rgba(116, 116, 170, 1);
+    }
+}

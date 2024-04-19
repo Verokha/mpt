@@ -1,0 +1,86 @@
+@import "base.scss";
+@import "header.scss";
+main {
+    .title-text {
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
+        margin-bottom: get-vw(41px);
+    }
+    .description-text {
+        margin-bottom: get-vw(27px);
+        color: rgba(0, 0, 0, 1);
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        span {
+            font-weight: 700;
+        }
+    }
+    .card {
+        padding-top: get-vw(31px);
+        padding-left: get-vw(43px);
+        padding-right: get-vw(30px);
+        padding-bottom: get-vw(30px);
+        margin-bottom: get-vw(390px);
+        .card-title {
+            //@include font(24px, 700, 29.26px);
+            font-family: "Montserrat", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            color: rgba(0, 0, 0, 1);
+        }
+        form {
+            label[for="all"] {
+                @include font(16px, 400, 21.94px);
+                color: rgba(120, 120, 120, 1);
+            }
+            p[for="allSelect"] {
+                @include font(16px, 400, 21.94px);
+                color: rgba(0, 0, 0, 1);
+                margin-top: get-vw(6px);
+            }
+            .radio-title {
+                @include font(16px, 400, 21.94px);
+                color: rgba(120, 120, 120, 1);
+                margin-top: get-vw(34px);
+                margin-bottom: get-vw(11px);
+            }
+            .radio-type-label {
+                @include font(16px, 400, 21.94px);
+                color: rgba(0, 0, 0, 1);
+            }
+            .item-input {
+                &:not(:last-child) {
+                    margin-bottom: get-vw(15px);
+                }
+                .simple-input-label {
+                    @include font(16px, 400, 21.94px);
+                    color: rgba(120, 120, 120, 1);
+                    margin-bottom: get-vw(6px);
+                }
+            }
+            .submit-block {
+                margin-top: get-vw(61px);
+                button {
+                    @include font(20px, 700, 29.26px);
+                    color: rgba(255, 255, 255, 1);
+                    --bs-btn-active-bg: rgba(116, 116, 170, 1);
+                    --bs-btn-active-border-color: rgba(116, 116, 170, 1);
+                    background-color: rgba(116, 116, 170, 1);
+                    border-color: rgba(116, 116, 170, 1);
+                    border-radius: 0;
+                    &:hover,
+                    &:focus {
+                        color: rgba(255, 255, 255, 1);
+                        background-color: rgba(116, 116, 170, 1);
+                        border-color: rgba(116, 116, 170, 1);
+                    }
+                }
+            }
+        }
+    }
+}

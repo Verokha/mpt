@@ -1,0 +1,31 @@
+@import "base.scss";
+.shadow {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+}
+.card_wrapper {
+    .left_part {
+        .type_label {
+            @include font(18px, 700, 29.26px);
+        }
+    }
+    .right_part {
+        .current_status {
+            background-color: rgba(250, 255, 0, 0.2);
+            @include font(16px, 700, 21.94px);
+        }
+        .actions {
+            .action {
+                @include font(16px, 700, 21.94px);
+                &:first-child {
+                    margin-right: 0.5rem;
+                }
+                &.reject {
+                    background-color: rgba(255, 15, 0, 0.2);
+                }
+                &.accept {
+                    background-color: rgba(167, 227, 146, 0.5);
+                }
+            }
+        }
+    }
+}

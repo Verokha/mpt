@@ -1,0 +1,22 @@
+header {
+    .container {
+        .row {
+            img {
+                width: 100%;
+                @media (min-width: 992px) {
+                    width: 70%;
+                }
+            }
+            .text-block {
+                p {
+                    @media (max-width: 576px) {
+                        font-size: 0.7rem;
+                    }
+                    @media (min-width: 992px) {
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+}

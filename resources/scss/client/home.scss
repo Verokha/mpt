@@ -1,0 +1,74 @@
+@import "base.scss";
+@import "header.scss";
+main {
+    .auth-wrapper {
+        margin-top: get-vw(95px);
+        .title {
+            @include font(18px, 700, 29.26px);
+        }
+        .row-card-auth {
+            margin-top: get-vw(42px);
+            .card-auth {
+                .card-title {
+                    @include font(18px, 700, 29.26px);
+                }
+                .btn {
+                    @include font(16px, 700, 25.6px);
+                }
+            }
+        }
+    }
+    .actions-container {
+        margin-bottom: get-vw(59px);
+        .card-title {
+            @include font(20px, 700, 43.88px);
+            margin-bottom: get-vw(38px);
+        }
+        .card-text {
+            @include font(16px, 400, 25.6px);
+            margin-bottom: get-vw(38px);
+        }
+        .btn {
+            background-color: rgba(116, 116, 170, 1);
+            border-color: rgba(116, 116, 170, 1);
+            @include font(16px, 700, 25.6px);
+            width: 100%;
+            &:hover,
+            &:focus {
+                color: rgba(255, 255, 255, 1);
+                background-color: rgba(116, 116, 170, 1);
+                border-color: rgba(116, 116, 170, 1);
+            }
+        }
+    }
+    .accordion-container {
+        margin-bottom: get-vw(215px);
+        .accordion {
+            .accordion-item {
+                margin-bottom: get-vw(15px);
+                border-radius: get-vw(10px);
+                border-top: get-vw(1px) solid rgba(0, 0, 0, 0.175);
+                border-bottom: get-vw(1px) solid rgba(0, 0, 0, 0.175);
+                border-left: get-vw(1px) solid rgba(0, 0, 0, 0.175);
+                border-right: get-vw(1px) solid rgba(0, 0, 0, 0.175);
+                .accordion-header {
+                    .accordion-button {
+                        @include font(18px, 700, 29.26px);
+                        //text-decoration: underline;
+                        &:not(.collapsed) {
+                            color: var(--bs-accordion-btn-color);
+                            background-color: var(--bs-accordion-btn-bg);
+                        }
+                        &:not(.collapsed)::after,
+                        &::after {
+                            background-image: unset !important;
+                        }
+                    }
+                }
+                .accordion-body {
+                    @include font(16px, 400, 25.6px);
+                }
+            }
+        }
+    }
+}

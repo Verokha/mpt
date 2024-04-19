@@ -1,0 +1,16 @@
+@import "base.scss";
+
+.card-form-wrapper {
+    .logo {
+        img {
+            width: 100%;
+        }
+    }
+    .form-wrapper {
+        form {
+            .form-text {
+                color: black;
+            }
+        }
+    }
+}
