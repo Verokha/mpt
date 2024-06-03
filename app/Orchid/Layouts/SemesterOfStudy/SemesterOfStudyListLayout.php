@@ -31,12 +31,12 @@ class SemesterOfStudyListLayout extends Table
             TD::make('id', 'ID')
                 ->render(function (SemesterOfStudy $sos) {
                     return Link::make($sos->id)
-                        ->route('platform.sos.edit', ['tod' => $sos->id]);
+                        ->route('platform.sos.edit', ['sos' => $sos->id]);
                 }),
             TD::make('name', 'Наименование документа')
                 ->render(function (SemesterOfStudy $sos) {
                     return Link::make($sos->name)
-                        ->route('platform.sos.edit', ['tod' => $sos->id]);
+                        ->route('platform.sos.edit', ['sos' => $sos->id]);
                 }),
             TD::make('is_active', 'Активность')->usingComponent(Boolean::class),
         ];

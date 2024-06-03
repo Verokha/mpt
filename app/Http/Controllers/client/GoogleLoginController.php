@@ -20,7 +20,7 @@ class GoogleLoginController
     {
         try {
             $student = $authService->login();
-            Auth::guard('student')->login($student);
+            Auth::guard('student')->login($student, true);
         } catch (Error | Exception $e) {
             report($e);
         }

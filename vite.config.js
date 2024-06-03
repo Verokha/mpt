@@ -13,6 +13,8 @@ export default defineConfig({
                 "resources/scss/panel/base.scss",
                 "resources/scss/panel/index.scss",
                 "resources/scss/panel/login.scss",
+                "resources/js/panel/modal-handler.js",
+                "resources/js/client/form-runner.js",
             ],
             refresh: true,
         }),

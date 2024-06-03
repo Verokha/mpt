@@ -23,6 +23,18 @@ class RequestRepository
                     ) as file", [$class]);
     }
 
+    private static function searchQuery(Builder &$query, $searchList)
+    {
+        $queryItems = [];
+        $queryBind = [];
+        foreach($searchList as $index => $item) {
+            $queryItems[] = "CONCAT(r.first_name,r.second_name,r.patronymic) like ?";
+            $queryBind[] = '%' . $item . '%';
+        }
+        
+        $query->whereRaw(implode(" or ", $queryItems), $queryBind);
+    }
+
     private static function studySubQuery(Builder &$query, string $table)
     {
         $query->addSelect(["$table.type_document as typeDocument"]);
@@ -40,7 +52,7 @@ class RequestRepository
             "$table.whereNeeded",
         ]);
     }
-    public static function list(string $status, string $type)
+    public static function list(string $status, string $type, array $search = [])
     {
         $query = DB::table('requests', 'r');
         switch($type) {
@@ -64,8 +76,12 @@ class RequestRepository
         if (array_key_exists($status, Request::STATUSES)) {
             $query->where('r.status', '=', $status);
         }
+        if (count($search)) {
+            self::searchQuery($query, $search);
+        }
         return $query
             ->addSelect([
+                'r.id',
                 'r.first_name',
                 'r.second_name',
                 'r.patronymic',

@@ -1,6 +1,33 @@
 @import "base.scss";
+input:focus {
+    outline: none !important;
+    border-color: #dee2e6 !important;
+    box-shadow: none !important;
+}
 .shadow {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+}
+.modal {
+    .modal-dialog {
+        top: 50%;
+        -ms-transform: translateY(-50%) !important;
+        transform: translateY(-50%) !important;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+.primary {
+    background-color: rgba(167, 227, 146, 0.5) !important;
+    @include font(16px, 700, 21.94px);
+}
+.seconadary {
+    background-color: rgba(255, 15, 0, 0.2) !important;
+    @include font(16px, 700, 21.94px);
+}
+.neutral {
+    background-color: rgba(255, 255, 255, 0) !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+    @include font(16px, 700, 21.94px);
 }
 .card_wrapper {
     .left_part {
@@ -17,12 +44,13 @@
             .action {
                 @include font(16px, 700, 21.94px);
                 &:first-child {
-                    margin-right: 0.5rem;
+                    //margin-right: 0.5rem;
                 }
                 &.reject {
                     background-color: rgba(255, 15, 0, 0.2);
                 }
-                &.accept {
+                &.accept,
+                &.confirm {
                     background-color: rgba(167, 227, 146, 0.5);
                 }
             }

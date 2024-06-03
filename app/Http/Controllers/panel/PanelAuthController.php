@@ -29,7 +29,7 @@ class PanelAuthController
             'password' => 'required|string',
         ]);
 
-        $auth = Auth::guard('web')->attempt(request()->only(['email', 'password']));
+        $auth = Auth::guard('web')->attempt(request()->only(['email', 'password']), true);
         if ($auth) {
             request()->session()->regenerate();
             return redirect()->route('panel.index');

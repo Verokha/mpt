@@ -2,6 +2,9 @@
 @section('style')
     @vite('resources/scss/client/study.certificate.scss')
 @endsection
+@section('script')
+    @vite('resources/js/client/form-runner.js')
+@endsection
 @section('content')
 <main>
     <div class="row">
@@ -54,7 +57,7 @@
 
                                     <div class="item-input">
                                         <label for="inputFirstdName" class="required form-label simple-input-label">Имя</label>
-                                        <input type="text" required maxlength="509" class="form-control" name="inputFirstdName" id="inputFirstdName" value="{{auth('student')->user()->first_name ?? ''}}">
+                                        <input type="text" required maxlength="509" class="form-control" name="inputFirstdName" id="inputFirstdName" >
                                         @error('inputFirstdName')
                                             <div class="form-text text-danger">Обязательное поле заполнено некорректно.</div>
                                         @enderror
@@ -73,9 +76,15 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12 submit-block">
+                                <div class="col-12 submit-block action_button">
                                     <button type="submit" class="btn btn-primary w-100">Заказать</button>
-                                </div>                                
+                                </div>
+                                <div class="col-12 loader_button submit-block d-none">
+                                    <button class="btn neutral w-100" type="button" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Отправка...
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </form>

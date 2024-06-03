@@ -2,6 +2,9 @@
 @section('style')
     @vite('resources/scss/client/study.certificate.scss')
 @endsection
+@section('script')
+    @vite('resources/js/client/form-runner.js')
+@endsection
 @section('content')
 <main>
     <div class="row">
@@ -32,7 +35,7 @@
                                 <div class="col-12 col-sm-6">
                                     <div class="item-input">
                                         <label for="formFile" class="required form-label simple-input-label">Платежка</label>
-                                        <input class="form-control" accept="application/pdf" type="file" id="formFile" name="formFile">
+                                        <input class="form-control" required accept="application/pdf" type="file" id="formFile" name="formFile">
                                         @error('formFile')
                                             <div class="form-text text-danger">Обязательное поле заполнено некорректно.</div>
                                         @enderror
@@ -49,7 +52,7 @@
 
                                     <div class="item-input">
                                         <label for="inputFirstdName" class="required form-label simple-input-label">Имя</label>
-                                        <input type="text" required maxlength="509" class="form-control" name="inputFirstdName" id="inputFirstdName" value="{{auth('student')->user()->first_name ?? ''}}">
+                                        <input type="text" required maxlength="509" class="form-control" name="inputFirstdName" id="inputFirstdName" >
                                         @error('inputFirstdName')
                                             <div class="form-text text-danger">Обязательное поле заполнено некорректно.</div>
                                         @enderror
@@ -62,7 +65,7 @@
 
                                     <div class="item-input">
                                         <label for="inputGroup" class="required form-label simple-input-label">Группа</label>
-                                        <input type="text" class="form-control" name="inputGroup" id="inputGroup">
+                                        <input type="text" required class="form-control" name="inputGroup" id="inputGroup">
                                         @error('inputGroup')
                                             <div class="form-text text-danger">Обязательное поле заполнено некорректно.</div>
                                         @enderror
@@ -70,7 +73,7 @@
 
                                     <div class="item-input">
                                         <label for="inputSemester" class="required control-label simple-input-label">Семестр</label>
-                                        <select class="form-select" name="inputSemester" id="inputSemester">
+                                        <select class="form-select" required name="inputSemester" id="inputSemester">
                                             <option value=""></option>
                                             @foreach ($semester as $item)
                                                 <option value="{{$item->id}}">{{ $item->name }}</option>
@@ -81,9 +84,15 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12 submit-block">
+                                <div class="col-12 submit-block action_button">
                                     <button type="submit" class="btn btn-primary w-100">Загрузить</button>
-                                </div>                                
+                                </div>
+                                <div class="col-12 loader_button submit-block d-none">
+                                    <button class="btn neutral w-100" type="button" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Отправка...
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </form>

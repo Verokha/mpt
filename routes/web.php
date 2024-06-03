@@ -29,4 +29,7 @@ Route::middleware(['auth:student'])->prefix('certificate')->group(function() {
 
 Route::middleware(['auth:web'])->prefix('panel')->group(function() {
     Route::get('/', [PanelRequestController::class, 'index'])->name('panel.index');
+    Route::post('/reject/{request}', [PanelRequestController::class, 'rejectRequest'])->name('request.reject');
+    Route::post('/accept/{request}', [PanelRequestController::class, 'acceptRequest'])->name('request.accept');
+    Route::post('/confirm/{request}', [PanelRequestController::class, 'confirmRequest'])->name('request.confirm');
 });

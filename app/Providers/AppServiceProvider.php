@@ -8,6 +8,7 @@ use App\Http\Services\client\PaymentRequestService;
 use App\Http\Services\client\StudyRequestService;
 use App\Http\Services\panel\RequestPanelService;
 use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
     {
         setlocale(LC_TIME, 'ru_RU');
         Carbon::setLocale(config('app.locale'));
+        Paginator::useBootstrapFive();
     }
 }

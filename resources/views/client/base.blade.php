@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     @vite('resources/scss/client/bootstrap.scss')
     @yield('style')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 <head>
 <body>
     <header class="p-3 mb-3 text-white" style="background-color: rgba(45, 45, 68, 1)">

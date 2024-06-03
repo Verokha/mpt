@@ -3,6 +3,9 @@
     @vite('resources/scss/panel/base.scss')
     @vite('resources/scss/panel/index.scss')
 @endsection
+@section('script')
+    @vite('resources/js/panel/modal-handler.js')
+@endsection
 @section('content')
 <main>
     <div class="row">
@@ -29,8 +32,12 @@
                 <button type="button" class="btn btn-secondary w-100 h-100 @if($statusRequest === 'archive') _mtp selected @endif">Архив</button>
             </a>
         </div>
-        <div class="col-12 mt-3">
-            <input class="form-control" type="text" placeholder="Поиск по студенту" aria-label="default input example">
+        <div class="col-12 input-group mt-3">
+            <input type="text" class="form-control" value="{{$search ?? ''}}" placeholder="ФИО студента" aria-describedby="button-find">
+            <button class="btn btn-outline-secondary" type="button" id="button-find">Найти</button>
+            @if ($search)
+                <button class="btn btn-outline-secondary" type="button" id="button-clear-find">&#x2715;   </button>
+            @endif
         </div>
 
         <div class="col-md-3 mt-3 mb-md-5">
@@ -51,7 +58,7 @@
 
         @foreach ($data as $item)
             <div class="col-12 card_wrapper">
-                <div class="card shadow mb-3">
+                <div class="card shadow mb-3" id="card-{{$item['id']}}">
                     <div class="row g-0">
                         <div class="col-md-6 left_part">
                             <div class="card-body">
@@ -112,8 +119,21 @@
                                     <p class="card-text">{{$item['whereNeeded']}}</p>
                                 @endif
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end actions">
+                                    @php
+                                        $i = 0;
+                                    @endphp
                                     @foreach ($item['actions'] as $techName => $action)
-                                        <button type="button" class="btn w-25 shadow action {{$techName}}">{{$action}}</button> 
+                                        <button 
+                                            type="button" 
+                                            class="btn col-12  col-md-5 col-lg-4 shadow action {{$techName}} @if ($i === 0) me-md-2 @endif" 
+                                            item-type="{{$techName}}" 
+                                            item-id={{$item['id']}}
+                                        >
+                                            {{$action}}
+                                        </button>
+                                        @php
+                                            $i++;
+                                        @endphp
                                     @endforeach
                                 </div>
                             </div>
@@ -122,7 +142,8 @@
                 </div>
             </div>
         @endforeach
-        
+        {{ $data->links() }}
     </div>
 </main>
 @endsection
+@include('panel.modals')

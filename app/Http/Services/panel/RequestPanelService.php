@@ -3,6 +3,7 @@
 namespace App\Http\Services\panel;
 
 use App\Models\Request;
+use App\Models\RequestPayment;
 use App\Repositories\panel\RequestRepository;
 use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Filesystem;
@@ -15,9 +16,13 @@ class RequestPanelService
     {
         $this->storage = Storage::disk('public');
     }
-    public function listRequests(string $status, string $type)
+    public function listRequests(string $status, string $type, ?string $search = null)
     {
-        $list = RequestRepository::list($status, $type);
+        $searchList = [];
+        if ($search) {
+            $searchList = preg_split('/\s+/', $search);
+        }
+        $list = RequestRepository::list($status, $type, $searchList);
         return $list->setCollection($list->getCollection()->transform(function ($item) use ($type, $status) {
             $presenter = [
                 'paymentFile' => isset($item->file) ? $this->getUrlByPath($item->file) : null,
@@ -44,8 +49,32 @@ class RequestPanelService
         return $this->storage->exists($path) ? $this->storage->url($path) : null;
     }
 
-    private function makeDate(string $crated_at)
+    public function accept(Request $request)
     {
+        if ($request->request_type === RequestPayment::class) {
+            $status = Request::ARCHIVE;
+        } else {
+            $status = Request::WAIT_SEND;
+        }
+        $request->changeStatus($status);
+        $request->save();
+        $type = Request::getTypeStatement($request->request_type);
+        return $request->second_name . ' ' . $request->first_name . ',  Ваше заявление "' . $type . '" принято';
+    }
 
+    public function reject(Request $request, string $cause)
+    {
+        $request->changeStatus(Request::ARCHIVE);
+        $request->save();
+        $type = Request::getTypeStatement($request->request_type);
+        return $request->second_name . ' ' . $request->first_name . ',  Ваше заявление "' . $type . '" отклонено. <br/> Причина: '.$cause;
+    }
+
+    public function confirm(Request $request)
+    {
+        $request->changeStatus(Request::ARCHIVE);
+        $request->save();
+        $type = Request::getTypeStatement($request->request_type);
+        return $request->second_name . ' ' . $request->first_name . ',  Ваше заявление "' . $type . '" обработано. Документ готов и ожидает получения в канцелярии техникума';
     }
 }

@@ -15,11 +15,14 @@ class Request extends Model
     const STATUSES = [
         self::WAIT_ACTION => 'В ожидании действий',
         self::WAIT_SEND => 'В ожидании отправки',
-        self::ARCHIVE => 'Архив',
+        self::ARCHIVE => 'Сформировано',
     ];
 
     const ACTIONS = [
-        self::WAIT_ACTION => ['reject' => 'Отклонить', 'accept' => 'Принять'],
+        self::WAIT_ACTION => [
+            'reject' => 'Отклонить', 
+            'accept' => 'Принять'
+        ],
         self::WAIT_SEND => ['confirm' => 'Подтвердить'],
         self::ARCHIVE => [],
     ];
@@ -38,6 +41,13 @@ class Request extends Model
         'student_id',
     ];
 
+    protected static function booted(): void
+    {
+        static::deleted(function (Request $request) {
+            $request->requestTypeRelation->delete();
+        });
+    }
+
     public static function fillPersonalData(array $requestData) 
     {
         $request = new self();
@@ -48,13 +58,24 @@ class Request extends Model
         return $request;
     }
 
-    public function requestTypeRelation(string $class)
+    public function requestTypeRelation()
     {
-        return $this->hasOne($class, 'id', 'request_id');
+        return $this->hasOne($this->request_type, 'id', 'request_id');
     }
 
     public function student()
     {
         return $this->hasOne(Student::class, 'id', 'student_id');
+    }
+
+    public function changeStatus(string $status)
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    public static function getTypeStatement(string $model)
+    {
+        return self::TYPES_TRANSLATE[mb_strtolower(str_replace('App\Models\Request', '', $model))];
     }
 }
